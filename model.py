@@ -58,23 +58,11 @@ class SudokuCNN(nn.Module):
                                     nn.Conv2d(512, 512, kernel_size=3),
                                     nn.BatchNorm2d(512),
                                     nn.ReLU(True),
-                                    nn.ReflectionPad2d(1),
-                                    nn.Conv2d(512, 512, kernel_size=3),
-                                    nn.BatchNorm2d(512),
-                                    nn.ReLU(True),
-                                    nn.ReflectionPad2d(1),
-                                    nn.Conv2d(512, 512, kernel_size=3),
-                                    nn.BatchNorm2d(512),
-                                    nn.ReLU(True),
-                                    nn.ReflectionPad2d(1),
-                                    nn.Conv2d(512, 512, kernel_size=3),
-                                    nn.BatchNorm2d(512),
-                                    nn.ReLU(True),
-                                    nn.Conv2d(512, 10, kernel_size=1),
-                                    nn.BatchNorm2d(10),
+                                    nn.Conv2d(512, 9, kernel_size=1),
+                                    nn.BatchNorm2d(9),
                                     nn.ReLU(True))
 
-        self.fc1 = nn.Linear(512, 81 * 10)
+        self.fc1 = nn.Linear(512, 81 * 9)
 
     def forward(self, x):
         x = self.layers(x)
@@ -82,4 +70,4 @@ class SudokuCNN(nn.Module):
         # x = x.view(-1, 512)
         # x = self.fc1(x).view(-1, 9, 9, 10)
 
-        return x.view(-1, 9, 9, 10)
+        return x.view(-1, 9, 9, 9)
